@@ -1,0 +1,32 @@
+/***/
+/*{*/
+/*    margin:0;*/
+/*    padding: 0;*/
+/*}*/
+div.mainbox
+{
+    border: 1px solid black;
+    width: 40%;
+    margin:50px auto;
+}
+h3.tittle
+{
+    padding-left:2px;
+    color:rgb(24, 14, 255);
+    /*margin-top:10px;*/
+    /*margin-bottom:12px;*/
+    margin:10px 0 12px 14px;
+}
+label
+{
+    font-weight: 550;
+}
+span
+{
+    color:red;
+}
+.mainbox div
+{
+    margin:0 0 10px 6px;
+
+}
