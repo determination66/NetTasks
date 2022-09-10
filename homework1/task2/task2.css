@@ -6,27 +6,70 @@
 div.mainbox
 {
     border: 1px solid black;
-    width: 40%;
-    margin:50px auto;
+    width: 400px;
+    margin: 50px auto;
 }
-h3.tittle
+
+h3.title
 {
-    padding-left:2px;
-    color:rgb(24, 14, 255);
-    /*margin-top:10px;*/
-    /*margin-bottom:12px;*/
-    margin:10px 0 12px 14px;
+    padding-left: 2px;
+    color: rgb(24, 14, 255);
+    font-size: 13px;
+    margin: 10px 0 12px 22px;
 }
-label
+
+span.tip
 {
+    display: inline-block;
+    width: 80px;
+    height: 26px;
+    text-align: right;
     font-weight: 550;
+    font-size: 14px;
 }
-span
+
+.box
 {
-    color:red;
+    height: 20px;
+    border-radius: 2px;
+    background-color: yellow;
+    height: 18px;
 }
+
+span.required
+{
+    color: red;
+}
+
 .mainbox div
 {
-    margin:0 0 10px 6px;
+    margin: 0 0 10px 6px;
+}
 
+/*设置验证码样式部分*/
+/*#identify*/
+/*{*/
+/*    width: 500px;*/
+/*    margin: 30px auto;*/
+/*    text-align: center;*/
+/*}*/
+#capcha
+{
+    background-color: rgb(216, 183, 227);
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    cursor: pointer;
+    color: rgb(48, 58, 247);
+    font-style: italic;
+    text-align: center;
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+#change_capcha
+{
+    vertical-align: middle;
+    width: 27px;
+    cursor: pointer;
 }

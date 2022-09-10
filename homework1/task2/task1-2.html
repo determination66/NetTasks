@@ -4,37 +4,77 @@
     <meta charset="UTF-8">
     <title>欢迎注册会员</title>
     <link rel="stylesheet" href="task2.css">
+    <script src="js.js"></script>
 </head>
 <body>
   <div class="mainbox">
-    <h3 class="tittle">欢迎注册会员</h3>
+    <h3 class="title">欢迎注册会员</h3>
       <form action="receive.html" method="post">
           <div>
-              <label for="phone">手机号码：</label>
-              <input type="text" name="phonenum" id="phone" maxlength="11" placeholder="11位手机号">
-              <span>必填</span>
+              <label for="phone"><span class="tip">手机号码：</span></label>
+              <input type="text" name="phonenum" id="phone"
+                    class="box" maxlength="11" placeholder="11位手机号">
+              <span class="required">必填</span>
               <br>
           </div>
             <!--电话号码-->
           <div>
               <!--密码-->
-              <label for="pwd">创建密码：</label>
-              <input type="password" name="password" id="pwd" placeholder="请输入密码...">
-              <span>必填</span>
+              <label for="pwd"><span class="tip">创建密码：</span></label>
+              <input type="password" name="password" id="pwd"
+                     class="box" placeholder="请输入密码...">
+              <span class="required">必填</span>
           </div>
           <div>
               <!--邮箱-->
-              <label for="email">注册邮箱：</label>
-              <input type="email" name="email" id="email" placeholder="例如:wustzz@sina.com">
-              <span>必填</span>
+              <label for="email"><span class="tip">注册邮箱：</span></label>
+              <input type="email" name="email" id="email"
+                     class="box" placeholder="例如:wustzz@sina.com">
+              <span class="required">必填</span>
           </div>
           <div>
-
+                <!--验证码-->
+              <label for="ver"><span class="tip">验证码：</span></label>
+              <input type="text" name="ver" id="ver" class="box">
+                  <span id="capcha">4位验证码</span>
+                  <img src="arrow_03.png" id="change_capcha" alt="加载失败！" />
+          </div>
+          <div>
+              <span class="tip">性别：</span>
+              <label><input type="radio" name="sex" id="boy">男</label>
+              <label><input type="radio" name="sex" id="girl">女</label>
           </div>
 
 
       </form>
   </div>
-
 </body>
+<script>
+    //验证码：由大小写字母或数字组成
+    let codeStr =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    //验证码长度
+    let length = 4;
+    let capcha = document.getElementById("capcha");
+    let change_capcha = document.getElementById("change_capcha");
+    // 用来生成一个[n,m]随机整数
+    function getRandom(n, m) {
+        return parseInt(Math.random() * (m - n + 1) + n);
+    }
+    // 将随机生成的整数下标对应的字母放入span中
+    function getCode() {
+        let str = "";
+// 验证码有几位就循环几次
+        for (let i = 0; i < length; i++) {
+            let index = getRandom(0, 61);
+            str += codeStr.charAt(index);
+        }
+        capcha.innerHTML = str;
+    }
+    // 页面初始加载时就调用函数生成验证码，页面刷新也会执行
+    getCode();
+    // 点击刷新验证码
+    capcha.addEventListener("click", getCode);
+    change_capcha.addEventListener("click", getCode);
+</script>
 </html>
