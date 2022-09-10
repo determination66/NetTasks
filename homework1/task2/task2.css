@@ -14,11 +14,12 @@ h3.title
 {
     padding-left: 2px;
     color: rgb(24, 14, 255);
-    font-size: 13px;
+    font-size: 14px;
     margin: 10px 0 12px 22px;
+    font-weight: bolder;
 }
 
-span.tip
+.tip
 {
     display: inline-block;
     width: 80px;
@@ -30,10 +31,16 @@ span.tip
 
 .box
 {
+    width: 162px;
     height: 20px;
-    border-radius: 2px;
-    background-color: yellow;
-    height: 18px;
+    border:1.5px solid rgb(215, 215, 215);
+    /*border-left-color: red;*/
+    border-radius: 5px;
+    text-indent: 6px;
+}
+input::-webkit-input-placeholder
+{
+    color:rgb(141, 141, 141);
 }
 
 span.required
@@ -46,13 +53,6 @@ span.required
     margin: 0 0 10px 6px;
 }
 
-/*设置验证码样式部分*/
-/*#identify*/
-/*{*/
-/*    width: 500px;*/
-/*    margin: 30px auto;*/
-/*    text-align: center;*/
-/*}*/
 #capcha
 {
     background-color: rgb(216, 183, 227);
@@ -65,7 +65,29 @@ span.required
     text-align: center;
     font-weight: bold;
     padding: 0 10px;
+    line-height: 26px;
 }
+.nativeplace
+{
+    width: 82px;
+    height: 23px;
+    border:1.5px solid rgb(215, 215, 215);
+    border-radius: 5px;
+    padding-left:6px;
+}
+#education
+{
+    width: 170px;
+    height: 25px;
+    border:1.5px solid rgb(215, 215, 215);
+    border-radius: 5px;
+    padding-left:6px;
+}
+/*#intro*/
+/*{*/
+/*    line-height: 172px;*/
+/*}*/
+
 
 #change_capcha
 {

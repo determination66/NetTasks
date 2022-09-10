@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>省城联动</title>
+</head>
+
+<body>
+<select name="" id="province"></select>
+<select name="" id="cities"></select>
+<input type="password" id="www" style="border-color: red;">
+
+
+<script>
+  let province = ["四川", "广东", "湖南"];
+  let cities = [
+    ["成都", "德阳", "绵阳", "眉山"],
+    ["广州", "东莞", "深圳"],
+    ["长沙", "浏阳", "岳阳"]
+  ];
+  let provinceList = document.getElementById("province");
+  let cityList = document.getElementById("cities");
+
+  //封装
+  function add(arr, select) {
+    for (let i = 0; i < arr.length; i++) {
+      select.add(new Option(arr[i], i));
+    }
+  }
+  //添加默认省份
+  add(province, provinceList);
+
+  //添加默认城市
+  add(cities[provinceList.value], cityList);
+  provinceList.onchange = function () {
+    //获取cities的下标所对应的值
+    // console.log(cities[this.value]);
+    //添加一次就要把前面的清空一次
+    cityList.options.length = 0;
+    add(cities[this.value], cityList);
+  }
+</script>
+</body>
+
+</html>

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>欢迎注册会员</title>
     <link rel="stylesheet" href="task2.css">
-    <script src="js.js"></script>
 </head>
 <body>
   <div class="mainbox">
@@ -41,11 +40,65 @@
           </div>
           <div>
               <span class="tip">性别：</span>
-              <label><input type="radio" name="sex" id="boy">男</label>
+              <label><input type="radio" name="sex" id="boy">男&nbsp;&nbsp;&nbsp;</label>
               <label><input type="radio" name="sex" id="girl">女</label>
           </div>
+          <div>
+              <span class="tip">生日：</span>
+              <input type="date" name="birth" id="birth" class="box">
+          </div>
+          <div>
+              <span class="tip">年龄：</span>
+              <input type="text" name="age" id="age" class="box">
+          </div>
+          <div>
+              <span class="tip">籍贯：</span>
+              <select name="provinces" id="province" class="nativeplace"></select>
+              <select name="cities" id="cities" class="nativeplace"></select>
+          </div>
+          <div>
+              <span class="tip">个人学历：</span>
+              <select name="education" id="education">
+                  <option value="primary">小学</option>
+                  <option value="middle">初中</option>
+                  <option value="high">高中</option>
+                  <option value="juniorcollage">大专</option>
+                  <option value="collage">大学</option>
+                  <option value="postgraduate">研究生</option>
+              </select>
+          </div>
+          <div>
+              <span class="tip">月薪：</span>
+              <input type="range" name="salary" id="salary" min="3000" max="15000" step="10" value="6000">
+              <span id="shownum"></span>
 
-
+          </div>
+          <div>
+              <span class="tip">个人爱好：</span>
+              <label><input type="checkbox" name="sing" id="sing">唱歌</label>
+              <label><input type="checkbox" name="run" id="run">跑步</label>
+              <label><input type="checkbox" name="swim" id="swim">游泳</label>
+          </div>
+          <div>
+              <p class="tip">图片预览：</p>
+              <p></p>
+              <div id="test-image-preview" style="border: 1px solid silver; width: 290px; height: 200px; background-repeat: no-repeat;
+background-position: center;">
+              </div>
+              <p></p>
+              <span class="tip">个人照片：</span>
+                  <input type="file" id="test-image-file" name="test">
+              <p id="test-file-info"></p>
+          </div>
+          <div>
+              <span class="tip">个人简介：</span>
+              <textarea name="introduce" id="introduce" cols="30" rows="10" style="display:inline-block;"></textarea>
+              <br>
+              <span class="tip"></span>
+              <input type="submit" value="提交">
+              <input type="reset" value="重填">
+          </div>
+          
       </form>
   </div>
 </body>
@@ -76,5 +129,68 @@
     // 点击刷新验证码
     capcha.addEventListener("click", getCode);
     change_capcha.addEventListener("click", getCode);
+
+    //设置二级联动，省份对应城市
+    let province = ["湖北", "河南", "山东"];
+    let cities = [
+        ["武汉", "襄阳", "黄冈", "十堰"],
+        ["郑州", "开封", "新乡","洛阳"],
+        ["济南", "青岛", "德州","泰安"]
+    ];
+    let provinceList = document.getElementById("province");
+    let cityList = document.getElementById("cities");
+
+    //封装
+    function add(arr, select) {
+        for (let i = 0; i < arr.length; i++) {
+            select.add(new Option(arr[i], i));
+        }
+    }
+    //添加默认省份
+    add(province, provinceList);
+
+    //添加默认城市
+    add(cities[provinceList.value], cityList);
+    provinceList.onchange = function () {
+        //获取cities的下标所对应的值
+        // console.log(cities[this.value]);
+        //添加一次就要把前面的清空一次
+        cityList.options.length = 0;
+        add(cities[this.value], cityList);
+    }
+
+    //月薪的数值显示
+    var num = document.getElementById("shownum"); // 根据id值找到span元素
+    window.onload = function () {
+        num.innerHTML = document.getElementById("salary").value; // 获取区间域初始value值 }
+        document.getElementById("salary").onchange = function () {
+           num.innerHTML = this.value; // 将当前区间域的value作为span元素的内容
+        }
+    }
+</script>
+<script>
+    var fileInput = document.getElementById('test-image-file');
+    var info = document.getElementById('test-file-info');
+    var preview = document.getElementById('test-image-preview');
+    fileInput.addEventListener('change', function () { // 监听change事件
+        preview.style.backgroundImage = ''; // 清除背景图片
+        if (!fileInput.value) {
+            info.innerHTML = '没有选择文件';
+            return;
+        }
+        var file = fileInput.files[0]; // 获取File引用
+// 获取File信息:
+        info.innerHTML = '文件: ' + file.name + '<br>' + '大小: ' + file.size + '<br>' + '修改: ' + file.lastModifiedDate;
+        if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+            alert('不是有效的图片文件!');
+            return;
+        }
+        var reader = new FileReader(); // 读取文件
+        reader.onload = function (e) { // 发起一个异步操作来读取文件内容
+            var data = e.target.result; // data串形如： 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
+            preview.style.backgroundImage = 'url(' + data + ')';
+        };
+        reader.readAsDataURL(file); // 以DataURL的形式读取文件
+    });
 </script>
 </html>
